@@ -14,18 +14,17 @@ namespace Spork\Batch;
 use Spork\Batch\Strategy\ChunkStrategy;
 use Spork\Batch\Strategy\StrategyInterface;
 use Spork\Exception\UnexpectedTypeException;
-use Spork\Job;
+use Spork\AbstractJob;
 use Spork\ProcessManager;
 
-class BatchJob extends Job
+class BatchJob extends AbstractJob
 {
-    private $strategy;
+    protected $strategy;
 
     public function __construct(ProcessManager $manager, $data = null, StrategyInterface $strategy = null)
     {
         parent::__construct($manager, $data);
         $this->strategy = $strategy ?: new ChunkStrategy();
-
     }
 
     public function setStrategy(StrategyInterface $strategy)
@@ -41,7 +40,7 @@ class BatchJob extends Job
             $this->setCallback($callback);
         }
 
-        return $this->manager->fork($this)->setName($this->name.' batch');
+        return $this->manager->fork($this)->setName($this->name . ' batch');
     }
 
     /**
@@ -55,8 +54,7 @@ class BatchJob extends Job
         foreach ($this->strategy->createBatches($this->data) as $index => $batch) {
             $forks[] = $this->manager
                 ->fork($this->strategy->createRunner($batch, $this->callback))
-                ->setName(sprintf('%s batch #%d', $this->name, $index))
-            ;
+                ->setName(sprintf('%s batch #%d', $this->name, $index));
         }
 
         // block until all forks have exited

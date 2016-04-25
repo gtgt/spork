@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fon60
- * Date: 23.04.16
- * Time: 12:24
- */
 
 namespace Spork;
 
-
 use Spork\Exception\UnexpectedTypeException;
 
-class Job
+abstract class AbstractJob
 {
     protected $manager;
     protected $data;
@@ -64,24 +57,6 @@ class Job
      *
      * @see execute()
      */
-    public function __invoke()
-    {
-        $forks = array();
-//        foreach ($this->strategy->createBatches($this->data) as $index => $batch) {
-//            $forks[] = $this->manager
-//                ->fork($this->strategy->createRunner($batch, $this->callback))
-//                ->setName(sprintf('%s batch #%d', $this->name, $index))
-//            ;
-//        }
+    abstract public function __invoke();
 
-        // block until all forks have exited
-        $this->manager->wait();
-
-        $results = array();
-        foreach ($forks as $fork) {
-            $results = array_merge($results, $fork->getResult());
-        }
-
-        return $results;
-    }
 }
