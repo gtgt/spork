@@ -105,7 +105,8 @@ class ProcessManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->manager->wait();
 
-        $this->assertEquals($expected, $fork->getResult());
+        $actual = $fork->getResult();
+        $this->assertEquals(sort($expected), sort($actual));
     }
 
     /**
