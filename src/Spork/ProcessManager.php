@@ -76,9 +76,28 @@ class ProcessManager
         return $this->factory->createBatchJob($this, $data, $strategy);
     }
 
+    /**
+     * @param $data
+     * @param $callable
+     * @param StrategyInterface|null $strategy
+     *
+     * @return Fork
+     */
     public function process($data, $callable, StrategyInterface $strategy = null)
     {
         return $this->createBatchJob($data, $strategy)->execute($callable);
+    }
+
+    /**
+     * @param $data
+     * @param $callable
+     * @param int $poolSize
+     * @return Fork
+     *
+     */
+    public function parallel($data, $callable, $poolSize = 3)
+    {
+        return $this->factory->createPoolJob($this, $data, $poolSize)->execute($callable);
     }
 
     /**
