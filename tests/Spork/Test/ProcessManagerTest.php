@@ -11,10 +11,11 @@
 
 namespace Spork\Test;
 
+use PHPUnit\Framework\TestCase;
 use Spork\Fork;
 use Spork\ProcessManager;
 
-class ProcessManagerTest extends \PHPUnit_Framework_TestCase
+class ProcessManagerTest extends \TestCase
 {
     /**
      * Process Manager object

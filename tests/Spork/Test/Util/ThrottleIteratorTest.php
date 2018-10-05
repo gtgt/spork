@@ -11,9 +11,10 @@
 
 namespace Spork\Test\Util;
 
+use PHPUnit\Framework\TestCase;
 use Spork\Util\ThrottleIterator;
 
-class ThrottleIteratorTest extends \PHPUnit_Framework_TestCase
+class ThrottleIteratorTest extends \TestCase
 {
     private $iterator;
 

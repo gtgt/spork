@@ -11,9 +11,10 @@
 
 namespace Spork\Test;
 
+use PHPUnit\Framework\TestCase;
 use Spork\ProcessManager;
 
-class SignalTest extends \PHPUnit_Framework_TestCase
+class SignalTest extends \TestCase
 {
     private $manager;
 

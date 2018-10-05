@@ -11,9 +11,10 @@
 
 namespace Spork\Test\Deferred;
 
+use PHPUnit\Framework\TestCase;
 use Spork\Deferred\Deferred;
 
-class DeferredTest extends \PHPUnit_Framework_TestCase
+class DeferredTest extends \TestCase
 {
     private $defer;
 

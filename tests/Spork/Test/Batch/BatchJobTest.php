@@ -2,7 +2,9 @@
 
 namespace Spork\Test\Batch;
 
-class BatchJobTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class BatchJobTest extends \TestCase
 {
     public function testErrorPropagation()
     {

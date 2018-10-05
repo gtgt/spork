@@ -11,11 +11,12 @@
 
 namespace Spork\Test\Batch\Strategy;
 
+use PHPUnit\Framework\TestCase;
 use Spork\Batch\Strategy\MongoStrategy;
 use Spork\EventDispatcher\Events;
 use Spork\ProcessManager;
 
-class MongoStrategyTest extends \PHPUnit_Framework_TestCase
+class MongoStrategyTest extends \TestCase
 {
     private $mongo;
     private $manager;
