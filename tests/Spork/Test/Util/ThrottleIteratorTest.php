@@ -11,10 +11,11 @@
 
 namespace Spork\Test\Util;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\Util\ThrottleIterator;
 
-class ThrottleIteratorTest extends \TestCase
+class ThrottleIteratorTest extends TestCase
 {
     private $iterator;
 

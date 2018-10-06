@@ -11,12 +11,13 @@
 
 namespace Spork\Test\Batch\Strategy;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\Batch\Strategy\MongoStrategy;
 use Spork\EventDispatcher\Events;
 use Spork\ProcessManager;
 
-class MongoStrategyTest extends \TestCase
+class MongoStrategyTest extends TestCase
 {
     private $mongo;
     private $manager;

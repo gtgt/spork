@@ -11,12 +11,13 @@
 
 namespace Spork\Test\Deferred;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 
 use Spork\Deferred\Deferred;
 use Spork\Deferred\DeferredAggregate;
 
-class DeferredAggregateTest extends \TestCase
+class DeferredAggregateTest extends TestCase
 {
     public function testInvalidChild()
     {

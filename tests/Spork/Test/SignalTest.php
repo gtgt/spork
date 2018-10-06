@@ -11,10 +11,11 @@
 
 namespace Spork\Test;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\ProcessManager;
 
-class SignalTest extends \TestCase
+class SignalTest extends TestCase
 {
     private $manager;
 

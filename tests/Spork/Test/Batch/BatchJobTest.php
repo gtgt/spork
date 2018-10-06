@@ -2,9 +2,10 @@
 
 namespace Spork\Test\Batch;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 
-class BatchJobTest extends \TestCase
+class BatchJobTest extends TestCase
 {
     public function testErrorPropagation()
     {

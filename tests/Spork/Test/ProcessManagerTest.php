@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Spork, an OpenSky project.
  *
@@ -11,11 +10,12 @@
 
 namespace Spork\Test;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\Fork;
 use Spork\ProcessManager;
 
-class ProcessManagerTest extends \TestCase
+class ProcessManagerTest extends TestCase
 {
     /**
      * Process Manager object

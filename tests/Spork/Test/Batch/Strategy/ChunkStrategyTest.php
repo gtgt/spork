@@ -11,10 +11,11 @@
 
 namespace Spork\Test\Batch\Strategy;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\Batch\Strategy\ChunkStrategy;
 
-class ChunkStrategyTest extends \TestCase
+class ChunkStrategyTest extends TestCase
 {
     /**
      * @dataProvider provideNumber

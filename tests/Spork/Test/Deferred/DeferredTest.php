@@ -11,10 +11,11 @@
 
 namespace Spork\Test\Deferred;
 
+require_once ('vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Spork\Deferred\Deferred;
 
-class DeferredTest extends \TestCase
+class DeferredTest extends TestCase
 {
     private $defer;
 
