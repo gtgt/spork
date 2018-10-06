@@ -97,7 +97,7 @@ class DeferredTest extends TestCase
      */
     public function testInvalidResolve($method, $invalid)
     {
-        $this->setExpectedException('LogicException', 'that has already been');
+        $this->expectException('LogicException', 'that has already been');
 
         $this->defer->$method();
         $this->defer->$invalid();
@@ -124,7 +124,7 @@ class DeferredTest extends TestCase
      */
     public function testInvalidCallback($method, $invalid)
     {
-        $this->setExpectedException('Spork\Exception\UnexpectedTypeException', 'callable');
+        $this->expectException('Spork\Exception\UnexpectedTypeException', 'callable');
 
         $this->defer->$method($invalid);
     }

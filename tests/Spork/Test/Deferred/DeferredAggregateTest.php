@@ -21,7 +21,7 @@ class DeferredAggregateTest extends TestCase
 {
     public function testInvalidChild()
     {
-        $this->setExpectedException('Spork\Exception\UnexpectedTypeException', 'PromiseInterface');
+        $this->expectException('Spork\Exception\UnexpectedTypeException', 'PromiseInterface');
 
         $defer = new DeferredAggregate(array('asdf'));
     }
