@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/techno-express/spork.svg?branch=master)](https://travis-ci.org/techno-express/spork)
+[![Build Status](https://travis-ci.org/gtgt/spork.svg?branch=master)](https://travis-ci.org/gtgt/spork)
 
 Spork: PHP on a Fork
 --------------------
