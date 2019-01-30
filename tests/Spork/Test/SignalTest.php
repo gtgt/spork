@@ -17,6 +17,9 @@ use Spork\ProcessManager;
 
 class SignalTest extends TestCase
 {
+    /**
+     * @var ProcessManager
+     */
     private $manager;
 
     protected function setUp()

@@ -66,6 +66,8 @@ class Fork implements DeferredInterface
             $this->processWaitStatus($status);
         }
 
+        pcntl_signal_dispatch();
+
         return $this;
     }
 

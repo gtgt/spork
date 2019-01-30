@@ -13,6 +13,10 @@ declare(ticks=1);
 
 namespace Spork\EventDispatcher;
 
+if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+    pcntl_async_signals(true);
+}
+
 use Symfony\Component\EventDispatcher\EventDispatcher as BaseEventDispatcher;
 
 /**
