@@ -14,52 +14,22 @@ namespace Spork\Batch;
 use Spork\Batch\Strategy\ChunkStrategy;
 use Spork\Batch\Strategy\StrategyInterface;
 use Spork\Exception\UnexpectedTypeException;
+use Spork\AbstractJob;
 use Spork\ProcessManager;
 
-class BatchJob
+class BatchJob extends AbstractJob
 {
-    private $manager;
-    private $data;
-    private $strategy;
-    private $name;
-    private $callback;
+    protected $strategy;
 
     public function __construct(ProcessManager $manager, $data = null, StrategyInterface $strategy = null)
     {
-        $this->manager = $manager;
-        $this->data = $data;
+        parent::__construct($manager, $data);
         $this->strategy = $strategy ?: new ChunkStrategy();
-        $this->name = '<anonymous>';
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function setStrategy(StrategyInterface $strategy)
     {
         $this->strategy = $strategy;
-
-        return $this;
-    }
-
-    public function setData($data)
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    public function setCallback($callback)
-    {
-        if (!is_callable($callback)) {
-            throw new UnexpectedTypeException($callback, 'callable');
-        }
-
-        $this->callback = $callback;
 
         return $this;
     }
@@ -70,7 +40,7 @@ class BatchJob
             $this->setCallback($callback);
         }
 
-        return $this->manager->fork($this)->setName($this->name.' batch');
+        return $this->manager->fork($this)->setName($this->name . ' batch');
     }
 
     /**
@@ -84,8 +54,7 @@ class BatchJob
         foreach ($this->strategy->createBatches($this->data) as $index => $batch) {
             $forks[] = $this->manager
                 ->fork($this->strategy->createRunner($batch, $this->callback))
-                ->setName(sprintf('%s batch #%d', $this->name, $index))
-            ;
+                ->setName(sprintf('%s batch #%d', $this->name, $index));
         }
 
         // block until all forks have exited

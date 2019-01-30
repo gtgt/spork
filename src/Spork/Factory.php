@@ -13,6 +13,7 @@ namespace Spork;
 
 use Spork\Batch\BatchJob;
 use Spork\Batch\Strategy\StrategyInterface;
+use Spork\Pool\PoolJob;
 
 class Factory
 {
@@ -28,6 +29,18 @@ class Factory
     public function createBatchJob(ProcessManager $manager, $data = null, StrategyInterface $strategy = null)
     {
         return new BatchJob($manager, $data, $strategy);
+    }
+
+    /**
+     * @param ProcessManager $manager
+     * @param null $data
+     * @param int $poolSize
+     * @return AbstractJob
+     *
+     */
+    public function createPoolJob(ProcessManager $manager, $data = null, $poolSize = 3)
+    {
+        return new PoolJob($manager, $data, $poolSize);
     }
 
     /**

@@ -97,6 +97,19 @@ class ProcessManagerTest extends TestCase
         $this->assertEquals($expected, $fork->getResult());
     }
 
+    public function testPoolProcessing()
+    {
+        $expected = range(50, 59);
+        $fork = $this->manager->parallel($expected, function($item) {
+            return $item;
+        });
+
+        $this->manager->wait();
+
+        $actual = $fork->getResult();
+        $this->assertEquals(sort($expected), sort($actual));
+    }
+
     /**
      * Test batch processing with return values containing a newline character
      */
