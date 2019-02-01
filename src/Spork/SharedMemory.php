@@ -51,12 +51,15 @@ class SharedMemory
      */
     public function receive()
     {
-        if (($shmId = @shmop_open($this->pid, 'a', 0, 0)) > 0) {
+        set_error_handler(function () { return true; });
+        $shmId = @shmop_open($this->pid, 'a', 0, 0);
+        restore_error_handler();
+        if ($shmId > 0) {
             $serializedMessages = shmop_read($shmId, 0, shmop_size($shmId));
             shmop_delete($shmId);
             shmop_close($shmId);
 
-            return unserialize($serializedMessages);
+            return unserialize(gzuncompress($serializedMessages));
         }
 
         return array();
@@ -71,19 +74,11 @@ class SharedMemory
      */
     public function send($message, $signal = null, $pause = 500)
     {
-        $messageArray = array();
-
-        if (($shmId = @shmop_open($this->pid, 'a', 0, 0)) > 0) {
-            // Read any existing messages in shared memory
-            $readMessage = shmop_read($shmId, 0, shmop_size($shmId));
-            $messageArray = unserialize($readMessage);
-            shmop_delete($shmId);
-            shmop_close($shmId);
-        }
+        $messageArray = $this->receive();
 
         // Add the current message to the end of the array, and serialize it
         $messageArray[] = $message;
-        $serializedMessage = serialize($messageArray);
+        $serializedMessage = gzcompress(serialize($messageArray), 9);
 
         // Write new serialized message to shared memory
         $shmId = shmop_open($this->pid, 'c', 0644, strlen($serializedMessage));
